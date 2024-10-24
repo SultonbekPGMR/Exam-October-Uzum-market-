@@ -3,5 +3,6 @@
 
     <string name="do_you_have_an_account">Avval ro’yxatdan o’tganmisiz?</string>
     <string name="don_t_have_an_account_yet">Akkauntingiz yo’qmi?</string>
+    <string name="oldprice"><strike>23 000</strike></string>
 
 </resources>

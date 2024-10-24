@@ -13,6 +13,16 @@ object Preferences {
         preferences = sharedPreferences
     }
 
+    fun isFirstTime(boolean: Boolean) {
+        preferences.edit().putBoolean("first", boolean).apply()
+    }
+
+    fun isFirstTime(): Boolean {
+        return preferences.getBoolean("first", true)
+    }
+
+
+
 
     fun isUserSignedIn(): Boolean {
         return preferences.getBoolean(SIGN_IN, false)

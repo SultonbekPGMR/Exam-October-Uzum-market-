@@ -33,7 +33,7 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
                 findNavController().navigate(R.id.action_splashScreen_to_mainScreen)
             }else findNavController().navigate(R.id.action_splashScreen_to_signInScreen )
 
-        },1000)
+        },100)
 
 
     }

@@ -29,7 +29,11 @@
         android:id="@+id/mainScreen"
         android:name="uz.gita.examoctoberuzum.presentation.screen.main.MainScreen"
         tools:layout="@layout/screen_main"
-        android:label="MainScreen" />
+        android:label="MainScreen" >
+        <action
+            android:id="@+id/action_mainScreen_to_screenFavourite"
+            app:destination="@id/screenFavourite" />
+    </fragment>
     <fragment
         android:id="@+id/signInScreen"
         tools:layout="@layout/screen_sign_in"
@@ -60,4 +64,9 @@
             app:popUpToInclusive="true"
             app:destination="@id/signInScreen" />
     </fragment>
+
+    <fragment
+        android:id="@+id/screenFavourite"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.favourite.ScreenFavourite"
+        android:label="ScreenFavourite" />
 </navigation>

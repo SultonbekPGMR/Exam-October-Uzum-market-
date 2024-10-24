@@ -3,5 +3,9 @@
     <style name="Base.Theme.ExamOctoberUzum" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
          <item name="colorPrimary">@color/dark_purple</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="android:editTextColor">@android:color/black</item>
+        <item name="android:textColorHint">@color/gray</item>
+
     </style>
 </resources>

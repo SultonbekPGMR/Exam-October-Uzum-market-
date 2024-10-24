@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/homeScreen">
+
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.home.HomeScreen"
+        tools:layout="@layout/screen_home"
+        android:label="HomeScreen" />
+    <fragment
+        android:id="@+id/catalogScreen"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.catalog.CategoryScreen"
+        tools:layout="@layout/screen_catalog"
+        android:label="CatalogScreen" >
+        <action
+            android:id="@+id/action_catalogScreen_to_newCategory"
+            app:destination="@id/newCategory" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartScreen"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.cart.CartScreen"
+        tools:layout="@layout/screen_cart"
+        android:label="CartScreen" />
+    <fragment
+        android:id="@+id/profileScreen"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.profile.ProfileScreen"
+        tools:layout="@layout/screen_profile"
+        android:label="ProfileScreen" />
+    <dialog
+        android:id="@+id/newCategory"
+        tools:layout="@layout/screen_new_category"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.newcatalog.NewCategoryDialog"
+        android:label="NewCategory" />
+</navigation>
