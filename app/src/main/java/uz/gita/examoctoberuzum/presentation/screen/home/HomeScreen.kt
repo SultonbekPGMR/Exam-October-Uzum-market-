@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import uz.gita.examoctoberuzum.R
 import uz.gita.examoctoberuzum.data.source.local.AppDatabase
@@ -37,6 +38,40 @@ class HomeScreen : Fragment(R.layout.screen_home) {
 
 
         addListeners()
+
+        val searchScreen = SearchScreen()
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+
+                return true
+            }
+
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText == null) {
+                    return true
+                }
+
+                searchScreen.submitQuery(newText)
+
+
+                return true
+            }
+        })
+
+
+        binding.searchView.setOnQueryTextFocusChangeListener { view, b ->
+            if (b) {
+                childFragmentManager.beginTransaction()
+                    .replace(R.id.container_search, searchScreen).addToBackStack("search")
+                    .commit()
+            } else {
+                searchScreen.popBack()
+            }
+        }
+
 
     }
 

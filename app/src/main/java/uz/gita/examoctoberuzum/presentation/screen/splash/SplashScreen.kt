@@ -30,10 +30,18 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
         Handler().postDelayed({
 
             if (Preferences.isUserSignedIn()){
-                findNavController().navigate(R.id.action_splashScreen_to_mainScreen)
-            }else findNavController().navigate(R.id.action_splashScreen_to_signInScreen )
+                view.post {
+                    findNavController().navigate(R.id.action_splashScreen_to_mainScreen)
+                }
 
-        },100)
+            }else {
+
+                view.post {
+                findNavController().navigate(R.id.action_splashScreen_to_signInScreen )
+                    }
+            }
+
+        },1000)
 
 
     }

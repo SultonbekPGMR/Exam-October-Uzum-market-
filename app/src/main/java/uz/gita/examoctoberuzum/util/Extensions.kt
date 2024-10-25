@@ -11,6 +11,7 @@ fun Fragment.navigateTo(destinationId: Int) {
     val navController = navHostFragment.navController
     navController.navigate(destinationId)
 }
+
 fun Fragment.navigateTo(directions: NavDirections) {
     val navHostFragment = requireActivity().supportFragmentManager
         .findFragmentById(R.id.nav_host) as NavHostFragment

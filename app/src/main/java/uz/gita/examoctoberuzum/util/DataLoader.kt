@@ -28,8 +28,9 @@ object DataLoader {
                 categoryId = 50,
                 description = "zo'r",
                 name = "Televizor",
-                oldPrice = "180 000",
-                newPrice = "120 000",
+                oldPrice = "180000",
+                newPrice = "120000",
+                totalPrice = "120000",
                 image = R.drawable.def_product_1,
                 isDefault = 1
             )
@@ -40,8 +41,9 @@ object DataLoader {
                 categoryId = 40,
                 description = "zo'r kiyim",
                 name = "Erkaklar Hudisi",
-                oldPrice = "150 000",
-                newPrice = "100 000",
+                oldPrice = "150000",
+                newPrice = "100000",
+                totalPrice = "100000",
                 image = R.drawable.def_product_2,
                 isDefault = 1
             )
@@ -52,8 +54,9 @@ object DataLoader {
                 categoryId = 50,
                 description = "zo'r uskuna",
                 name = "mini Pilisos",
-                oldPrice = "80 000",
-                newPrice = "30 000",
+                oldPrice = "80000",
+                newPrice = "30000",
+                totalPrice = "30000",
                 image = R.drawable.def_product_3,
                 isDefault = 1
             )
@@ -64,8 +67,9 @@ object DataLoader {
                 categoryId = 30,
                 description = "zo'r yog'",
                 name = "Kungaboqar Yog'i",
-                oldPrice = "26 000",
-                newPrice = "19 000",
+                oldPrice = "26000",
+                newPrice = "19000",
+                totalPrice = "19000",
                 image = R.drawable.def_product_4,
                 isDefault = 1
             )
@@ -76,8 +80,9 @@ object DataLoader {
                 categoryId = 40,
                 description = "zo'r parashok",
                 name = "Parashok",
-                oldPrice = "67 000",
-                newPrice = "41 000",
+                oldPrice = "67000",
+                newPrice = "41000",
+                totalPrice = "41000",
                 image = R.drawable.def_product_5,
                 isDefault = 1
             )
@@ -88,8 +93,9 @@ object DataLoader {
                 categoryId = 50,
                 description = "zo'r narsa",
                 name = "Havo xushbo'ylartirgich",
-                oldPrice = "87 000",
-                newPrice = "51 000",
+                oldPrice = "87000",
+                newPrice = "51000",
+                totalPrice = "51000",
                 image = R.drawable.def_product_6,
                 isDefault = 1
             )
@@ -100,8 +106,9 @@ object DataLoader {
                 categoryId = 50,
                 description = "zo'r naushnik",
                 name = "Naushnik",
-                oldPrice = "87 000",
-                newPrice = "51 000",
+                oldPrice = "87000",
+                newPrice = "51000",
+                totalPrice = "51000",
                 image = R.drawable.def_product_7,
                 isDefault = 1
             )

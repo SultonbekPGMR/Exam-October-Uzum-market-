@@ -26,4 +26,5 @@ data class ProductEntity(
     var isFavourite: Int = 0,
     var countInCart: Int = 0,
     val imageUri: String = "",
+    var totalPrice: String = "",
 ) : Serializable

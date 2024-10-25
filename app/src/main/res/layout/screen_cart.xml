@@ -1,8 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#CDDC39"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="24dp"
+    android:background="@color/white"
     android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="?actionBarSize">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 ta mahsulot savatda"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/font_space_2"
+            android:textColor="@color/black" />
+
+    </FrameLayout>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toTopOf="@id/bottom_card_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_cart_product"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottom_card_view"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/white"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardElevation="16dp"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_cost"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="450 000 so'm"
+                android:letterSpacing="0.05"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/font_space_grotesk"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/total_product_count"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/total_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2ta Mahsulot"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/font_space_2"
+                android:textColor="@color/black" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_confirm_back"
+                android:text="Rasmiylashtirish"
+                android:textAllCaps="false"
+                android:fontFamily="@font/font_space_2"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent="0.4"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

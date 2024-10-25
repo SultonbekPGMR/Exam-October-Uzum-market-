@@ -27,8 +27,11 @@
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:itemIconSize="24dp"
         android:layout_height="wrap_content"
+
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
+        app:elevation="8dp"
+        android:elevation="8dp"
         app:menu="@menu/main_menu"
         android:background="@color/white"
         app:itemIconTint="@drawable/bottom_nav_item_tint"

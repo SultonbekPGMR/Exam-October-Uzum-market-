@@ -10,13 +10,20 @@ import uz.gita.examoctoberuzum.data.source.local.entity.ProductEntity
 interface ProductDao {
 
     @Query("SELECT * FROM ProductEntity")
-    fun getAllProducts():List<ProductEntity>
+    fun getAllProducts(): List<ProductEntity>
 
     @Query("SELECT * FROM ProductEntity WHERE categoryId = :id")
-    fun getProductsByCategoryId(id:Int):List<ProductEntity>
+    fun getProductsByCategoryId(id: Int): List<ProductEntity>
 
-@Query("SELECT * FROM ProductEntity WHERE isFavourite = 1")
-    fun getFavouriteProducts():List<ProductEntity>
+    @Query("SELECT * FROM ProductEntity WHERE isFavourite = 1")
+    fun getFavouriteProducts(): List<ProductEntity>
+
+    @Query("SELECT * FROM ProductEntity WHERE countInCart > 0")
+    fun getCartProducts(): List<ProductEntity>
+
+    @Query("SELECT * FROM ProductEntity WHERE ProductEntity.name LIKE  :text || '%'")
+    fun getProductsByQuery(text: String): List<ProductEntity>
+
 
     @Insert
     fun insertProduct(productEntity: ProductEntity)

@@ -92,7 +92,9 @@ class NewProductDialog : DialogFragment(R.layout.screen_new_product) {
                     0,
                     0,
                     0,
-                    imageUri = imageUi.toString()
+                    imageUri = imageUi.toString(),
+                    binding.edtNewPrice.text.toString().trim(),
+
                 )
             )
             Toast.makeText(context, "Qo'shildi", Toast.LENGTH_SHORT).show()
