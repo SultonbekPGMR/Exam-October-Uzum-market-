@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_mainScreen_to_screenFavourite"
             app:destination="@id/screenFavourite" />
+        <action
+            android:id="@+id/action_mainScreen_to_productsByCategoryScreen"
+            app:destination="@id/productsByCategoryScreen" />
     </fragment>
     <fragment
         android:id="@+id/signInScreen"
@@ -67,6 +70,25 @@
 
     <fragment
         android:id="@+id/screenFavourite"
-        android:name="uz.gita.examoctoberuzum.presentation.screen.favourite.ScreenFavourite"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.favourite.FavouriteScreen"
         android:label="ScreenFavourite" />
+    <fragment
+        android:id="@+id/productsByCategoryScreen"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.itemsbycategory.ProductsByCategoryScreen"
+        android:label="ProductsByCategoryScreen" >
+        <argument
+            android:name="categoryData"
+            app:argType="uz.gita.examoctoberuzum.data.source.local.entity.CategoryEntity" />
+        <action
+            android:id="@+id/action_productsByCategoryScreen_to_newProductDialog"
+            app:destination="@id/newProductDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/newProductDialog"
+        android:name="uz.gita.examoctoberuzum.presentation.screen.newproduct.NewProductDialog"
+        android:label="NewProductDialog" >
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+    </dialog>
 </navigation>

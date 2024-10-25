@@ -23,6 +23,7 @@ data class ProductEntity(
     val newPrice: String,
     val image: Int,
     val isDefault: Int = 0,
-    val isFavourite: Int = 0,
-    val countInCart: Int = 0,
-    ) : Serializable
+    var isFavourite: Int = 0,
+    var countInCart: Int = 0,
+    val imageUri: String = "",
+) : Serializable

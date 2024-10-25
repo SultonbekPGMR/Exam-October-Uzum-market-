@@ -11,6 +11,8 @@ import uz.gita.examoctoberuzum.R
 import uz.gita.examoctoberuzum.data.source.local.entity.CategoryEntity
 import uz.gita.examoctoberuzum.databinding.ScreenCatalogBinding
 import uz.gita.examoctoberuzum.presentation.adapter.CategoryAdapter
+import uz.gita.examoctoberuzum.presentation.screen.main.MainScreenDirections
+import uz.gita.examoctoberuzum.util.navigateTo
 
 class CategoryScreen : Fragment(R.layout.screen_catalog), CategoryContract.View {
 
@@ -47,6 +49,7 @@ class CategoryScreen : Fragment(R.layout.screen_catalog), CategoryContract.View 
             }
         }
 
+
     }
 
     override fun showCategories(list: List<CategoryEntity>) {
@@ -56,7 +59,7 @@ class CategoryScreen : Fragment(R.layout.screen_catalog), CategoryContract.View 
 
     private var isClicked = true
     override fun openNewCategoryScreen() {
-        if (isClicked){
+        if (isClicked) {
 
 
             findNavController().navigate(R.id.action_catalogScreen_to_newCategory)
@@ -67,6 +70,8 @@ class CategoryScreen : Fragment(R.layout.screen_catalog), CategoryContract.View 
     }
 
     override fun openItemsByCategoryScreen(categoryEntity: CategoryEntity) {
+
+        navigateTo(MainScreenDirections.actionMainScreenToProductsByCategoryScreen(categoryEntity))
 
     }
 

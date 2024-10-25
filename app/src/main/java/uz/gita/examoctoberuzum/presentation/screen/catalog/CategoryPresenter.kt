@@ -9,7 +9,7 @@ class CategoryPresenter(private val view: CategoryContract.View) : CategoryContr
         view.showCategories(model.getAllCategories())
     }
     override fun btnItemClicked(categoryEntity: CategoryEntity) {
-
+view.openItemsByCategoryScreen(categoryEntity)
     }
 
     override fun btnPlusClicked() {

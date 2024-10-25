@@ -7,19 +7,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
+import uz.gita.examoctoberuzum.R
+import uz.gita.examoctoberuzum.data.source.local.AppDatabase
 import uz.gita.examoctoberuzum.data.source.local.entity.ProductEntity
 import uz.gita.examoctoberuzum.databinding.ItemProductBinding
 
 class ProductAdapter : Adapter<ProductAdapter.Holder>() {
 
-    private lateinit var list: List<ProductEntity>
+    private  var list: ArrayList<ProductEntity> = ArrayList()
 
     lateinit var funItemClicked: (productEntity: ProductEntity) -> Unit
 
+    lateinit var btnFavouriteClicked: (pos: Int, productEntity: ProductEntity) -> Unit
+
+    lateinit var showToast: (message: String) -> Unit
+
+    fun setList(list: List<ProductEntity>) {
+        this.list.clear()
+        this.list.addAll(list)
+    }
 
     fun submitList(list: List<ProductEntity>) {
-        this.list = list
-
+        this.list.clear()
+        this.list.addAll(list)
         notifyDataSetChanged()
     }
 
@@ -27,13 +38,41 @@ class ProductAdapter : Adapter<ProductAdapter.Holder>() {
 
         init {
             binding.root.setOnClickListener {
-                funItemClicked.invoke(list[adapterPosition])
+//                funItemClicked.invoke(list[adapterPosition])
+            }
+
+            binding.btnAddToCart.setOnClickListener {
+                if (list[adapterPosition].countInCart == 0) {
+                    list[adapterPosition].countInCart++
+                    AppDatabase.instance.getProductDao().updateProduct(list[adapterPosition])
+                    showToast.invoke("Savatga qo'shildi")
+
+                } else {
+                    showToast.invoke("Allaqachon savatda")
+                }
+            }
+
+        }
+
+        init {
+            binding.btnFavourite.setOnClickListener {
+                btnFavouriteClicked.invoke(adapterPosition, list[adapterPosition])
             }
         }
 
+
         fun onBind(productEntity: ProductEntity) {
-            binding.name.text = productEntity.name
-            binding.image.setImageResource(productEntity.image)
+
+            if (productEntity.isDefault == 1) binding.image.setImageResource(productEntity.image)
+            else Glide.with(binding.image.context)
+                .load(productEntity.imageUri) // Load the image from the content URI
+                .into(binding.image) // Set the image into your ImageView
+
+
+            binding.btnFavourite.setImageResource(if (productEntity.isFavourite == 0) R.drawable.baseline_favorite_border_24 else R.drawable.baseline_favorite_24)
+
+
+                binding.name.text = productEntity.name
             binding.oldPrice.text = SpannableString("${productEntity.oldPrice} so'm").apply {
                 setSpan(
                     StrikethroughSpan(),

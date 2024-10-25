@@ -116,8 +116,8 @@ object DataLoader {
 
     private fun submitCategories() {
         categories.add(CategoryEntity(10, "Sumkalar", R.drawable.cat_bag))
-        categories.add(CategoryEntity(20, "Kitoblarl", R.drawable.cat_book))
-        categories.add(CategoryEntity(30, "Oziq Ovqat", R.drawable.cat_food))
+        categories.add(CategoryEntity(20, "Kitoblar", R.drawable.cat_book))
+        categories.add(CategoryEntity(30, "Oziq Ovqatlar", R.drawable.cat_food))
         categories.add(CategoryEntity(40, "Kiyimlar", R.drawable.cat_clothes))
         categories.add(CategoryEntity(50, "Texnikalar", R.drawable.cat_television))
         categories.add(CategoryEntity(60, "Qo'l soatlar", R.drawable.cat_clock))

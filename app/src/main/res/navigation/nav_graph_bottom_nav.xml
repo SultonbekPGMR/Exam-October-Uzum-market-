@@ -19,6 +19,7 @@
         <action
             android:id="@+id/action_catalogScreen_to_newCategory"
             app:destination="@id/newCategory" />
+
     </fragment>
     <fragment
         android:id="@+id/cartScreen"

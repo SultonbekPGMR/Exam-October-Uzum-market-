@@ -1,11 +1,10 @@
 package uz.gita.examoctoberuzum.presentation.screen.home
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import uz.gita.examoctoberuzum.R
 import uz.gita.examoctoberuzum.data.source.local.AppDatabase
 import uz.gita.examoctoberuzum.databinding.ScreenHomeBinding
@@ -25,22 +24,47 @@ class HomeScreen : Fragment(R.layout.screen_home) {
 
     private val adapter by lazy { ProductAdapter() }
 
+    private val productDao by lazy { AppDatabase.instance.getProductDao() }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = ScreenHomeBinding.bind(view)
         binding.adPager.adapter = AdPagerAdapter()
 
 
-        binding.rv.adapter  = adapter
-        adapter.submitList(AppDatabase.instance.getProductDao().getAllProducts())
+        binding.rv.adapter = adapter
+        adapter.submitList(productDao.getAllProducts())
 
+
+        addListeners()
+
+    }
+
+
+    private var isClicked = true
+    private fun addListeners() {
+        adapter.showToast = {
+            if (isClicked) {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                isClicked = false
+                Handler().postDelayed({ isClicked = true }, 2000)
+
+            }
+        }
+
+        adapter.btnFavouriteClicked = { pos, productEntity ->
+            productEntity.isFavourite = if (productEntity.isFavourite == 0) 1 else 0
+            productDao.updateProduct(productEntity)
+            adapter.setList(productDao.getAllProducts())
+            adapter.notifyItemChanged(pos)
+
+        }
 
 
         binding.btnFavourite.setOnClickListener {
 
             navigateTo(R.id.screenFavourite)
         }
-
 
 
     }
