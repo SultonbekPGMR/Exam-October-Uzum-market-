@@ -1,7 +1,6 @@
 package uz.gita.examoctoberuzum.presentation.screen.favourite
 
 import uz.gita.examoctoberuzum.data.source.local.entity.ProductEntity
-import uz.gita.examoctoberuzum.presentation.screen.itemsbycategory.ProductsModel
 
 interface FavouriteContract {
 
@@ -14,17 +13,21 @@ interface FavouriteContract {
     }
 
     interface View {
-
         fun showProducts(list: List<ProductEntity>)
+        fun setList(list: List<ProductEntity>)
+        fun notifyItemChanged(pos: Int)
+        fun notifyItemRemoved(pos: Int)
         fun setList(pos: Int, list: List<ProductEntity>)
+        fun showToast(message: String)
+
+        fun showOrHideEmptyBox(boolean: Boolean)
 
     }
 
 
     interface Presenter {
-        fun itemClicked(productEntity: ProductEntity)
-        fun btnFavouriteClicked(pos: Int, productEntity: ProductEntity)
-        fun onResume()
+        fun itemFavouriteClicked(pos: Int)
+        fun itemCartClicked(pos: Int)
     }
 
 

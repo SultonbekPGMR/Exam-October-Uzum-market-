@@ -68,6 +68,7 @@
                 android:layout_margin="16dp"
                 android:layout_gravity="center"
                 android:foreground="?android:selectableItemBackground"
+                android:backgroundTint="@color/white"
                 android:background="?selectableItemBackground"
                 app:cardCornerRadius="16dp"
                 android:layout_height="wrap_content">
@@ -124,6 +125,7 @@
                         android:id="@+id/edt_name"
                         android:inputType="textPersonName"
                         android:fontFamily="@font/font_space_grotesk"
+                        android:maxLength="100"
                         android:layout_width="match_parent"
                         android:textColor="@color/dark_purple"
                         android:layout_height="wrap_content" />
@@ -142,6 +144,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edt_desc"
                         android:inputType="textMultiLine"
+                        android:maxLines="4"
                         android:fontFamily="@font/font_space_grotesk"
                         android:layout_width="match_parent"
                         android:textColor="@color/dark_purple"
@@ -153,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="4dp"
-                    android:hint="Oldingi narx"
+                    android:hint="Oldingi narx (so'mda)"
                     android:textColorHint="@color/gray"
                     app:endIconTint="@color/dark_purple"
                     app:endIconMode="clear_text">
@@ -174,7 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="4dp"
-                    android:hint="Yangi narx"
+                    android:hint="Yangi narx (so'mda)"
                     android:textColorHint="@color/gray"
                     app:endIconTint="@color/dark_purple"
                     app:endIconMode="clear_text">

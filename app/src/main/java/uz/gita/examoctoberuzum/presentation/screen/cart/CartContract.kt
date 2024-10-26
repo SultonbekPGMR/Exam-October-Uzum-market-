@@ -16,7 +16,6 @@ interface CartContract {
         fun showProducts(list: List<ProductEntity>)
 
         fun showToast(message: String)
-
         fun setTextToTitle(text: String)
         fun setTextToToTalPrice(text: String)
         fun setTextToProductCount(text: String)
@@ -25,7 +24,6 @@ interface CartContract {
         fun setList(list: List<ProductEntity>)
         fun notifyItemChanged(pos: Int)
         fun notifyItemDeleted(pos: Int)
-
         fun openDetailsScreen()
 
 
@@ -40,6 +38,10 @@ interface CartContract {
         fun incrementClicked(pos: Int, productEntity: ProductEntity)
 
         fun itemClicked(productEntity: ProductEntity)
+
+        fun favouriteClicked(pos: Int)
+
+        fun deleteClicked(pos: Int)
 
 
     }

@@ -1,6 +1,7 @@
 package uz.gita.examoctoberuzum.presentation.screen.cart
 
 import uz.gita.examoctoberuzum.data.source.local.entity.ProductEntity
+import uz.gita.examoctoberuzum.util.formatPrice
 
 class CartPresenter(private val view: CartContract.View) : CartContract.Presenter {
     private val model by lazy { CartModel() }
@@ -8,15 +9,10 @@ class CartPresenter(private val view: CartContract.View) : CartContract.Presente
     private var totalPrice = ""
 
     init {
-        if (list.isEmpty()) {
 
-            setTitleText()
+        view.showProducts(list)
 
-        } else {
-            view.showProducts(list)
-
-
-        }
+        setTitleText()
         totalPrice = calculateTotalPrice()
         view.setTextToToTalPrice(totalPrice)
         view.setTextToProductCount(list.size.toString())
@@ -26,8 +22,7 @@ class CartPresenter(private val view: CartContract.View) : CartContract.Presente
         if (list.isEmpty()) {
             view.setTextToTitle("Savatda mahsulot yo'q")
             view.disableConfirmBtn()
-        }
-        else{
+        } else {
             view.setTextToTitle("Savatda ${list.size} ta mahsulot")
             view.enableConfirmBtn()
         }
@@ -38,11 +33,11 @@ class CartPresenter(private val view: CartContract.View) : CartContract.Presente
         list.forEach {
             sum += it.newPrice.toInt() * it.countInCart
         }
-        return sum.toString()
+        return sum.toString().formatPrice()
     }
 
     override fun btnConfirmClicked() {
-        for (i in 0 until list.size){
+        for (i in 0 until list.size) {
             list[i].countInCart = 0
             model.updateProduct(list[i])
         }
@@ -86,6 +81,26 @@ class CartPresenter(private val view: CartContract.View) : CartContract.Presente
     }
 
     override fun itemClicked(productEntity: ProductEntity) {
+
+    }
+
+    override fun favouriteClicked(pos: Int) {
+        list[pos].isFavourite = if (list[pos].isFavourite == 0) 1 else 0
+        model.updateProduct(list[pos])
+        view.setList(list)
+        view.notifyItemChanged(pos)
+
+    }
+
+    override fun deleteClicked(pos: Int) {
+        list[pos].countInCart = 0
+        model.updateProduct(list[pos])
+        list.removeAt(pos)
+        view.setList(list)
+        view.notifyItemDeleted(pos)
+        view.setTextToToTalPrice(calculateTotalPrice())
+        view.setTextToProductCount("${list.size}")
+        setTitleText()
 
     }
 

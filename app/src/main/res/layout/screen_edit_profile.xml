@@ -85,6 +85,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_full_name"
                     android:layout_width="match_parent"
+                    android:maxLength="70"
+                    android:inputType="textPersonName"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content"/>
 

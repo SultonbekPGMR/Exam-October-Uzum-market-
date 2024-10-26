@@ -35,6 +35,15 @@ class CartScreen : Fragment(R.layout.screen_cart), CartContract.View {
         adapter.funIncrementClicked =
             { position, product -> presenter.incrementClicked(position, product) }
 
+        adapter.funFavouriteClicked =
+            { position -> presenter.favouriteClicked(position) }
+
+
+        adapter.funDeleteClicked =
+            { position -> presenter.deleteClicked(position) }
+
+
+
         binding.btnConfirm.setOnClickListener { presenter.btnConfirmClicked() }
 
         presenter = CartPresenter(this)
@@ -43,6 +52,7 @@ class CartScreen : Fragment(R.layout.screen_cart), CartContract.View {
 
     override fun showProducts(list: List<ProductEntity>) {
         adapter.submitList(list)
+        binding.containerEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
     }
 
     override fun showToast(message: String) {
@@ -54,7 +64,7 @@ class CartScreen : Fragment(R.layout.screen_cart), CartContract.View {
     }
 
     override fun setTextToToTalPrice(text: String) {
-        binding.totalCost.text = text + " so'm"
+        binding.totalCost.text = text
     }
 
     override fun setTextToProductCount(text: String) {
@@ -72,10 +82,13 @@ class CartScreen : Fragment(R.layout.screen_cart), CartContract.View {
 
     override fun setList(list: List<ProductEntity>) {
         adapter.setList(list)
+        binding.containerEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+
     }
 
     override fun notifyItemChanged(pos: Int) {
         adapter.notifyItemChanged(pos)
+
     }
 
     override fun notifyItemDeleted(pos: Int) {

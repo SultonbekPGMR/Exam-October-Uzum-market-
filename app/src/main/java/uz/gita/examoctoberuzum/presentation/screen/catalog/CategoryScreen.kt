@@ -2,7 +2,6 @@ package uz.gita.examoctoberuzum.presentation.screen.catalog
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -15,6 +14,7 @@ import uz.gita.examoctoberuzum.presentation.screen.main.MainScreenDirections
 import uz.gita.examoctoberuzum.util.navigateTo
 
 class CategoryScreen : Fragment(R.layout.screen_catalog), CategoryContract.View {
+
 
     override fun onDestroyView() {
         super.onDestroyView()

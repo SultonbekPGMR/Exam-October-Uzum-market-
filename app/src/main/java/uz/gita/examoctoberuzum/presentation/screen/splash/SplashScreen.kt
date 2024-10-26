@@ -41,7 +41,7 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
                     }
             }
 
-        },1000)
+        },2000)
 
 
     }

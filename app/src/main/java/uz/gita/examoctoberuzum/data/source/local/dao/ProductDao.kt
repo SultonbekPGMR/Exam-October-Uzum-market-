@@ -21,8 +21,9 @@ interface ProductDao {
     @Query("SELECT * FROM ProductEntity WHERE countInCart > 0")
     fun getCartProducts(): List<ProductEntity>
 
-    @Query("SELECT * FROM ProductEntity WHERE ProductEntity.name LIKE  :text || '%'")
+    @Query("SELECT * FROM ProductEntity WHERE LOWER(ProductEntity.name) LIKE LOWER(:text) || '%'")
     fun getProductsByQuery(text: String): List<ProductEntity>
+
 
 
     @Insert

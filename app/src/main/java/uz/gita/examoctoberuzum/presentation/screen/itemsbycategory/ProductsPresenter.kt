@@ -5,13 +5,15 @@ import uz.gita.examoctoberuzum.data.source.local.entity.ProductEntity
 class ProductsPresenter(private val view: ProductsContract.View, private val categoryId: Int) :
     ProductsContract.Presenter {
     private val model by lazy { ProductsModel() }
+    private var list: ArrayList<ProductEntity> =
+        model.getProductsByCategoryId(categoryId) as ArrayList
 
     init {
-        view.showProducts(model.getProductsByCategoryId(categoryId))
+        view.showProducts(list)
     }
 
     override fun btnItemClicked(productEntity: ProductEntity) {
-        view.openDetailsScreen(productEntity)
+//        view.openDetailsScreen(productEntity)
     }
 
     override fun btnAddProductClicked() {
@@ -19,18 +21,30 @@ class ProductsPresenter(private val view: ProductsContract.View, private val cat
     }
 
     override fun onItemInserted() {
-        view.showProducts(model.getProductsByCategoryId(categoryId))
+        list.clear()
+        list.addAll(model.getProductsByCategoryId(categoryId))
+        view.showProducts(list)
     }
 
     override fun onResume() {
         view.showProducts(model.getProductsByCategoryId(categoryId))
     }
 
-    override fun favouriteClicked(pos: Int, productEntity: ProductEntity) {
-        productEntity.isFavourite = if (productEntity.isFavourite == 0) 1 else 0
-        model.updateProduct(productEntity)
-
-        view.setList(pos, model.getProductsByCategoryId(categoryId))
+    override fun itemFavouriteClicked(pos: Int) {
+        list[pos].isFavourite = if (list[pos].isFavourite == 0) 1 else 0
+        model.updateProduct(list[pos])
+        view.setList(list)
+        view.notifyItemChanged(pos)
 
     }
+
+    override fun itemCartClicked(pos: Int) {
+        list[pos].countInCart++
+        model.updateProduct(list[pos])
+        view.showToast("Mahsulot savatga qo'shildi. +1")
+        view.notifyItemChanged(pos)
+
+    }
+
+
 }

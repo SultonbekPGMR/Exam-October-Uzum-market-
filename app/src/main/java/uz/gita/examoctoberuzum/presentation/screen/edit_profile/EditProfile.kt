@@ -2,6 +2,7 @@ package uz.gita.examoctoberuzum.presentation.screen.edit_profile
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -10,8 +11,17 @@ import uz.gita.examoctoberuzum.data.source.local.AppDatabase
 import uz.gita.examoctoberuzum.data.source.local.entity.UserEntity
 import uz.gita.examoctoberuzum.data.source.preference.Preferences
 import uz.gita.examoctoberuzum.databinding.ScreenEditProfileBinding
+import uz.gita.examoctoberuzum.presentation.animation.MoveAnimation
 
 class EditProfile : Fragment(R.layout.screen_edit_profile) {
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation {
+        return if (enter) {
+            MoveAnimation.create(MoveAnimation.LEFT, true, 200)
+        } else {
+            MoveAnimation.create(MoveAnimation.RIGHT, false, 200)
+
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

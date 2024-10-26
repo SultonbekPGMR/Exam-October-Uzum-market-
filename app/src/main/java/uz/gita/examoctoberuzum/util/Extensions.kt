@@ -18,3 +18,11 @@ fun Fragment.navigateTo(directions: NavDirections) {
     val navController = navHostFragment.navController
     navController.navigate(directions)
 }
+
+fun String.formatPrice(): String {
+    return this.reversed()
+        .chunked(3)
+        .joinToString(" ")
+        .reversed() + " so'm"
+}
+

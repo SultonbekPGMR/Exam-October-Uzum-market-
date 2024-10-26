@@ -2,7 +2,9 @@ package uz.gita.examoctoberuzum.presentation.screen.itemsbycategory
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.view.animation.Animation
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -12,12 +14,23 @@ import uz.gita.examoctoberuzum.R
 import uz.gita.examoctoberuzum.data.source.local.entity.ProductEntity
 import uz.gita.examoctoberuzum.databinding.ScreenProductsByCategoryBinding
 import uz.gita.examoctoberuzum.presentation.adapter.ProductAdapter
+import uz.gita.examoctoberuzum.presentation.animation.MoveAnimation
 
 class ProductsByCategoryScreen : Fragment(R.layout.screen_products_by_category),
+
     ProductsContract.View {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation {
+        return if (enter) {
+            MoveAnimation.create(MoveAnimation.LEFT, true, 200)
+        } else {
+            MoveAnimation.create(MoveAnimation.RIGHT, false, 200)
+
+        }
     }
 
     private var _binding: ScreenProductsByCategoryBinding? = null
@@ -44,21 +57,16 @@ class ProductsByCategoryScreen : Fragment(R.layout.screen_products_by_category),
     }
 
 
-    private var isClicked = true
     private fun addListeners() {
-        adapter.showToast = {
-            if (isClicked) {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-                isClicked = false
-                Handler().postDelayed({ isClicked = true }, 2000)
-
-            }
-        }
-        adapter.btnFavouriteClicked = { pos, productEntity ->
-            presenter.favouriteClicked(pos, productEntity)
+        adapter.btnFavouriteClicked = { pos ->
+            presenter.itemFavouriteClicked(pos)
 
         }
 
+        adapter.funBtnCartClicked = {pos ->
+            presenter.itemCartClicked(pos)
+
+        }
 
         setFragmentResultListener("productKey") { _, bundle ->
             val categoryAdded = bundle.getBoolean("productAdded")
@@ -81,22 +89,36 @@ class ProductsByCategoryScreen : Fragment(R.layout.screen_products_by_category),
     override fun showProducts(list: List<ProductEntity>) {
         adapter.submitList(list)
     }
-
+    private var isClicked = true
     override fun openNewProductScreen() {
-        findNavController().navigate(
-            ProductsByCategoryScreenDirections.actionProductsByCategoryScreenToNewProductDialog(
-                args.categoryData.id
+        if (isClicked){
+            isClicked =false
+            findNavController().navigate(
+                ProductsByCategoryScreenDirections.actionProductsByCategoryScreenToNewProductDialog(
+                    args.categoryData.id
+                )
             )
-        )
+            Handler(Looper.getMainLooper()).postDelayed({
+                isClicked = true
+            },200)
+        }
+
     }
 
     override fun openDetailsScreen(productEntity: ProductEntity) {
 
     }
 
-    override fun setList(pos: Int, productsByCategoryId: List<ProductEntity>) {
+    override fun setList( productsByCategoryId: List<ProductEntity>) {
         adapter.setList(productsByCategoryId)
+    }
+
+    override fun notifyItemChanged(pos: Int) {
         adapter.notifyItemChanged(pos)
+    }
+
+    override fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 

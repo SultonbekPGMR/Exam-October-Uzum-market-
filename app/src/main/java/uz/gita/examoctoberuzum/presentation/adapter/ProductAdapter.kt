@@ -12,16 +12,17 @@ import uz.gita.examoctoberuzum.R
 import uz.gita.examoctoberuzum.data.source.local.AppDatabase
 import uz.gita.examoctoberuzum.data.source.local.entity.ProductEntity
 import uz.gita.examoctoberuzum.databinding.ItemProductBinding
+import uz.gita.examoctoberuzum.util.formatPrice
 
 class ProductAdapter : Adapter<ProductAdapter.Holder>() {
 
     private  var list: ArrayList<ProductEntity> = ArrayList()
 
     lateinit var funItemClicked: (productEntity: ProductEntity) -> Unit
+    lateinit var funBtnCartClicked: (pos: Int) -> Unit
 
-    lateinit var btnFavouriteClicked: (pos: Int, productEntity: ProductEntity) -> Unit
+    lateinit var btnFavouriteClicked: (pos: Int) -> Unit
 
-    lateinit var showToast: (message: String) -> Unit
 
     fun setList(list: List<ProductEntity>) {
         this.list.clear()
@@ -42,21 +43,14 @@ class ProductAdapter : Adapter<ProductAdapter.Holder>() {
             }
 
             binding.btnAddToCart.setOnClickListener {
-                if (list[adapterPosition].countInCart == 0) {
-                    list[adapterPosition].countInCart++
-                    AppDatabase.instance.getProductDao().updateProduct(list[adapterPosition])
-                    showToast.invoke("Savatga qo'shildi")
-
-                } else {
-                    showToast.invoke("Allaqachon savatda")
-                }
+              funBtnCartClicked.invoke(adapterPosition)
             }
 
         }
 
         init {
             binding.btnFavourite.setOnClickListener {
-                btnFavouriteClicked.invoke(adapterPosition, list[adapterPosition])
+                btnFavouriteClicked.invoke(adapterPosition)
             }
         }
 
@@ -70,10 +64,11 @@ class ProductAdapter : Adapter<ProductAdapter.Holder>() {
 
 
             binding.btnFavourite.setImageResource(if (productEntity.isFavourite == 0) R.drawable.baseline_favorite_border_24 else R.drawable.baseline_favorite_24)
+            binding.btnAddToCart.setImageResource(if (productEntity.countInCart == 0) R.drawable.baseline_add_shopping_cart_24 else R.drawable.baseline_shopping_cart_24)
 
 
                 binding.name.text = productEntity.name
-            binding.oldPrice.text = SpannableString("${productEntity.oldPrice} so'm").apply {
+            binding.oldPrice.text = SpannableString(productEntity.oldPrice.formatPrice()).apply {
                 setSpan(
                     StrikethroughSpan(),
                     0,
@@ -81,7 +76,7 @@ class ProductAdapter : Adapter<ProductAdapter.Holder>() {
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
-            binding.newPrice.text = productEntity.newPrice + " so'm"
+            binding.newPrice.text = productEntity.newPrice.formatPrice()
             binding.priceMonthly.text =
                 productEntity.newPrice.replace(" ", "").toInt().div(12).toString() + " so'm/oyiga"
         }

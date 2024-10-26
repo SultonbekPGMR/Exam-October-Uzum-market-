@@ -72,9 +72,9 @@
 
         <action
             android:id="@+id/action_signUpScreen_to_signInScreen"
+            app:destination="@id/signInScreen"
             app:popUpTo="@id/signUpScreen"
-            app:popUpToInclusive="true"
-            app:destination="@id/signInScreen" />
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
